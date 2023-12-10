@@ -1,0 +1,56 @@
+#include <stdint.h>
+#include <stdio.h>
+
+void hexdump(const uint8_t *input, size_t input_len)
+{
+	char ascii[17] = {0};
+
+	for (size_t i = 0; i < input_len; ++i)
+	{
+		printf("%02X ", input[i]);
+
+		if (input[i] >= ' ' && input[i] <= '~')
+		{
+			ascii[i % 16] = input[i];
+		}
+		else
+		{
+			ascii[i % 16] = '.';
+		}
+
+		if ((i + 1) % 8 == 0 || (i + 1) == input_len)
+		{
+			printf(" ");
+
+			if ((i + 1) % 16 == 0)
+			{
+				printf("|  %s \n", ascii);
+			}
+			else if (i + 1 == input_len)
+			{
+				ascii[(i + 1) % 16] = '\0';
+
+				if ((i + 1) % 16 <= 8)
+				{
+					printf(" ");
+				}
+
+				for (size_t j = (i + 1) % 16; j < 16; ++j)
+				{
+					printf("   ");
+				}
+
+				printf("|  %s \n", ascii);
+			}
+		}
+	}
+}
+
+int main(int argc, char **argv)
+{
+	uint8_t data[] = {0x50, 0x00, 0x00, 0x00, 0x18, 0x00, 0x53, 0x45, 0x4C, 0x45, 0x43, 0x54, 0x20, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6F, 0x6E, 0x28, 0x29, 0x00, 0x00, 0x00, 0x42, 0x00, 0x00, 0x00, 0x0C, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x44, 0x00, 0x00, 0x00, 0x06, 0x50, 0x00, 0x45, 0x00, 0x00, 0x00, 0x09, 0x00, 0x00, 0x00, 0x00, 0x00, 0x53, 0x00, 0x00, 0x00, 0x04};
+
+	hexdump(data, sizeof(data));
+
+	return 0;
+}
