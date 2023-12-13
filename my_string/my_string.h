@@ -145,7 +145,6 @@ size_t my_string_array_get_str_size_by_index(my_string_array_t* my_str_array, si
  * @param size_t             索引值
  *
  * @return char*             指向原生字符串的指针
- * 用法如下:
  */
 char* my_string_array_get_raw_str_by_index(my_string_array_t* my_str_array, size_t idx);
 /***********************************************************************************/
