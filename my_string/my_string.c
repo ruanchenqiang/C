@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+
 #include "my_string.h"
 
 /***********************************************************************************
@@ -165,38 +166,6 @@ my_string_t* my_string_duplicate(my_string_t* my_str)
 
 	return my_string_duplicate_by_raw_str(my_str->data, my_str->size);
 }
-
-void my_string_print(my_string_t* my_str)
-{
-	if(my_str == NULL || my_str->data == NULL)
-	{
-		return;
-	}
-
-#ifdef _WIN32
-	printf("size=%Iu capacity=%Iu str=", my_str->size, my_str->capacity);
-#else
-	printf("size=%zu capacity=%zu str=", my_str->size, my_str->capacity);
-#endif
-
-	size_t idx = 0;
-
-	for(idx = 0; idx < my_str->size; ++idx)
-	{
-		char ch = my_str->data[idx];
-
-		if(isprint(ch))
-		{
-			printf("%c", ch);
-		}
-		else
-		{
-			printf("\\x%02x", (uint8_t)ch);
-		}
-	}
-
-	printf("\n");
-}
 /***********************************************************************************/
 
 
@@ -335,28 +304,6 @@ char* my_string_array_get_raw_str_by_index(my_string_array_t* my_str_array, size
 	}
 
 	return my_string_get_raw_str(my_str_array->data[idx]);
-}
-
-void my_string_array_print(my_string_array_t* my_str_array)
-{
-	if(my_str_array == NULL || my_str_array->data == NULL)
-	{
-		return;
-	}
-
-#ifdef _WIN32
-	printf("size=%Iu capacity=%Iu\n", my_str_array->size, my_str_array->capacity);
-#else
-	printf("size=%zu capacity=%zu\n", my_str_array->size, my_str_array->capacity);
-#endif
-
-	size_t idx = 0;
-
-	for(idx = 0; idx < my_str_array->size; ++idx)
-	{
-		printf("\t");
-		my_string_print(my_str_array->data[idx]);
-	}
 }
 /***********************************************************************************/
 

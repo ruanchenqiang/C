@@ -66,13 +66,6 @@ size_t my_string_get_size(my_string_t* my_str);
  * @param my_string_t*     存放字符的容器
  *
  * @return char*           指向原生字符串的指针
- * 用法如下:
- * my_string_t* my_str = my_string_create(128);
- * my_string_append(my_str, "test", strlen("test"));
- * const char* str = my_string_get_raw_str(my_str);
- * size_t str_len = my_string_get_size(my_str);
- * printf("%.*s\n", (int)(str_len), str);
- * my_str = my_string_destroy(my_str);
  */
 char* my_string_get_raw_str(my_string_t* my_str);
 
@@ -83,13 +76,6 @@ char* my_string_get_raw_str(my_string_t* my_str);
  *
  * @return char*           指向原生字符串的指针
  * @attention 数据分离后，要手动释放
- * 用法如下:
- * my_string_t* my_str = my_string_create(128);
- * my_string_append(my_str, "test", strlen("test"));
- * char* str = my_string_detach_raw_str(my_str);
- * // other operation
- * free(str);
- * my_str = my_string_destroy(my_str);
  */
 char* my_string_detach_raw_str(my_string_t* my_str);
 
@@ -100,12 +86,6 @@ char* my_string_detach_raw_str(my_string_t* my_str);
  *
  * @return my_string_t*    存放字符的容器
  * @attention 返回值需要调用my_string_destroy()释放
- * 用法如下:
- * my_string_t* my_str = my_string_create(128);
- * my_string_append(my_str, "test", strlen("test"));
- * my_string_t* new_str = my_string_duplicate(my_str);
- * new_str = my_string_destroy(new_str);
- * my_str = my_string_destroy(my_str);
  */
 my_string_t* my_string_duplicate(my_string_t* my_str);
 
@@ -117,17 +97,8 @@ my_string_t* my_string_duplicate(my_string_t* my_str);
  *
  * @return my_string_t*    存放字符的容器
  * @attention 返回值需要调用my_string_destroy()释放
- * 用法如下:
- * my_string_t* my_str = my_string_duplicate_by_raw_str("test", strlen("test"));
- * // other operation
- * my_str = my_string_destroy(my_str);
  */
 my_string_t* my_string_duplicate_by_raw_str(const char* str, size_t size);
-
-/**
- * @brief 输出 my_string_t 结构，调试用
- */
-void my_string_print(my_string_t* my_str);
 /***********************************************************************************/
 
 
@@ -175,20 +146,8 @@ size_t my_string_array_get_str_size_by_index(my_string_array_t* my_str_array, si
  *
  * @return char*             指向原生字符串的指针
  * 用法如下:
- * my_string_array_t* my_str_array = my_string_array_create(16);
- * my_string_array_append(my_str_array, "abc", strlen("abc"));
- * my_string_array_append(my_str_array, "123", strlen("123"));
- * const char* str = my_string_array_get_raw_str_by_index(my_str_array, 1);
- * size_t str_len = my_string_array_get_str_size_by_index(my_str_array, 1);
- * printf("%.*s\n", (int)(str_len), str);
- * my_str_array = my_string_array_destroy(my_str_array);
  */
 char* my_string_array_get_raw_str_by_index(my_string_array_t* my_str_array, size_t idx);
-
-/**
- * @brief 输出 my_string_array_t 结构，调试用
- */
-void my_string_array_print(my_string_array_t* my_str_array);
 /***********************************************************************************/
 
 
@@ -205,10 +164,6 @@ void my_string_array_print(my_string_array_t* my_str_array);
  *
  * @return my_string_array_t*  存放分割后的子串
  * @attention 返回值需要调用my_string_array_destroy()释放
- * 用法如下:
- * my_string_array_t* result = my_raw_str_split("www.baidu.com", ".");
- * // other operation
- * result = my_string_array_destroy(result);
  */
 my_string_array_t* my_raw_str_split(const char* src, const char* sep);
 
